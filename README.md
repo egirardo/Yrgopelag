@@ -1,4 +1,4 @@
-# yrgopelag
+# Yrgopelag
 This is a desktop only website created to display the new luxury hotel ___ on ___ island. We can host three guests at a time and there are three levels of luxury available to choose from.
 
 **Link to project:** https://elsagirardo.com/yrgopelag

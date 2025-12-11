@@ -1,0 +1,16 @@
+:root {
+    --background-color: black;
+}
+
+body {
+    background-color: var(--background-color);
+    color: whitesmoke;
+}
+
+article {
+    margin: 2rem;
+}
+
+form {
+    width: 50vw;
+}

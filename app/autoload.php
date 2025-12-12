@@ -12,4 +12,6 @@ require __DIR__ . '/functions.php';
 
 $config = require __DIR__ . '/config.php';
 
+$admin = require __DIR__ . '/admin.php';
+
 $database = new PDO($config['database_path']);

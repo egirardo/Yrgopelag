@@ -10,5 +10,5 @@
     <link rel="stylesheet" href="/assets/styles/custom.css">
 </head>
 
-<body>
+<body data-bs-theme="dark">
     <?php require __DIR__ . "/navigation.php"; ?>

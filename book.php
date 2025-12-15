@@ -60,7 +60,7 @@
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input class="form-control" type="username" name="username" id="username" placeholder="Sbargle" required>
-            <small class="form-text">Please provide your first name.</small>
+            <small class="form-text">Please provide your username (first name).</small>
         </div>
 
         <div class="mb-3">

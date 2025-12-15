@@ -1,4 +1,6 @@
 vendor
 node_modules
 .env
+admin.php
 .DS_Store
+

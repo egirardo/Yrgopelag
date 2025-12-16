@@ -15,3 +15,7 @@ $config = require __DIR__ . '/config.php';
 $admin = require __DIR__ . '/admin.php';
 
 $database = new PDO($config['database_path']);
+
+$roomsStatement = $database->query("SELECT * FROM rooms");
+
+$rooms = $roomsStatement->fetchAll(PDO::FETCH_ASSOC);

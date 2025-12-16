@@ -3,9 +3,8 @@
 
 
 <?php
-$statement = $database->query("SELECT * FROM rooms");
 
-$rooms = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 
 echo "<pre>";
 var_dump($rooms);

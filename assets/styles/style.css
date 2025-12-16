@@ -11,15 +11,15 @@ form {
 }
 
 .tc-button {
-  position: fixed; /* Fixes the button relative to the browser window */
-  bottom: 1.3rem;    /* Positioned 20px from the bottom of the screen */
-  right: 1.3rem;     /* Positioned 20px from the right of the screen */
+  position: fixed;
+  bottom: 1.3rem;
+  right: 1.3rem;
   z-index: 1000; 
 
 }
 
 .offcanvas-body form {
-    width: 30vw;
+    width: 90%;
 }
 
 .calendar-datepicker-container {

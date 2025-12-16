@@ -43,7 +43,7 @@
                     <option value="luxury"><?= $rooms[2]['rank']; ?> - $<?= $rooms[2]['price']; ?></option>
                 </select>
 
-                <label for=" event_date">Start Date:</label>
+                <label for="event_date">Start Date:</label>
                 <input type="date" id="start_date" name="event_date" value="<?= $admin['start-date']; ?>" required>
 
                 <label for="event_date">End Date:</label>
@@ -51,12 +51,14 @@
                 <input type="submit" value="Book Now">
             </form>
         </div>
+
+
         <!-- once user hits submit on the date-picker section, a checkout section appears at the bottom summarizing their choices and asking for their username, transfercode, and amount. features can also be added here. -->
 
     </div>
     </div>
     <!-- below code will be changed later to take on final booking processing -->
-    <form action="app/users/book.php" method="POST">
+    <!-- <form action="app/users/book.php" method="POST">
         <label class="form-label mt-4">Withdraw</label>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
@@ -71,7 +73,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+    </form> -->
 </article>
 
 <button class="btn btn-primary tc-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#transferCodeService" aria-controls="transferCodeService">transferCode Service</button>

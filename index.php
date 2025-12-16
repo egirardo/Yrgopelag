@@ -8,6 +8,8 @@
 
 echo "<pre>";
 var_dump($rooms);
+var_dump($bookings);
+
 
 ?>
 

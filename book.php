@@ -43,7 +43,7 @@
                         <select name="room_picker" class="form-select" id="room_picker" required>
                             <option value="">-Select-</option>
                             <?php foreach ($rooms as $room) : ?>
-                                <option value="<?= $room['rank']; ?>"><?= $room['rank']; ?> - $<?= $room['price']; ?></option>
+                                <option id="<?= $room['rank']; ?>" value="<?= $room['price']; ?>"><?= $room['rank']; ?> - $<?= $room['price']; ?></option>
                             <?php endforeach; ?>
                         </select>
 
@@ -58,24 +58,54 @@
 
                         <?php foreach ($features as $feature) : ?>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="<?= $feature['feature']; ?>">
+                                <input class="form-check-input" type="checkbox" value="<?= $feature['price'] ?>" id="<?= $feature['feature']; ?>">
                                 <label class="form-check-label" for="<?= $feature['feature']; ?>">
                                     <?= $feature['feature'] . " - $" . $feature['price']; ?>
                                 </label>
                             </div>
                         <?php endforeach; ?>
+                        <div id="prelim-total">
+                            <h6>Total:</h6>
+                        </div>
                     </fieldset>
                 </div>
                 <input type="submit" value="Book Now">
                 <!-- need to fix styling on calendar and arrow icons for form -->
             </form>
         </div>
-
-
-        <!-- once user hits submit on the date-picker section, a checkout section appears at the bottom summarizing their choices and asking for their username, transfercode, and amount. features can also be added here. -->
-
     </div>
+
+
+    <!-- once user hits submit on the date-picker section, a checkout section appears at the bottom summarizing their choices and asking for their username, transfercode, and amount. features can also be added here. -->
+    <div class="check-out hidden">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Order</div>
+            <div class="card-body">
+                <h4 class="card-title">Order Summary:</h4>
+                <p class="card-text order"></p>
+            </div>
+        </div>
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Checkout</div>
+            <div class="card-body">
+                <h4 class="card-title">Complete Your Order:</h4>
+                <div>
+                    <label class="col-form-label mt-4" for="user">Username</label>
+                    <input type="text" class="form-control" placeholder="First Name" id="user">
+                </div>
+                <div>
+                    <label class="col-form-label mt-4" for="transferCode">Transfer Code</label>
+                    <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode">
+                </div>
+                <div>
+                    <label class="col-form-label mt-4" for="totalCost">Confirm Total:</label>
+                    <input type="text" class="form-control" placeholder="Enter total shown in order panel" id="totalCost">
+                </div>
+            </div>
+        </div>
     </div>
+
+
     <!-- below code will be changed later to take on final booking processing -->
     <!-- <form action="app/users/book.php" method="POST">
         <label class="form-label mt-4">Withdraw</label>

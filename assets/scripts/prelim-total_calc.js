@@ -1,5 +1,5 @@
 // 1. Get the select element by its ID
-const roomPicker = document.getElementById("room_picker");
+const roomPickerTotal = document.getElementById("room_picker");
 
 // 2. Define the function to handle the change event
 function handleSelectChange(event) {
@@ -10,8 +10,15 @@ function handleSelectChange(event) {
   console.log("Dropdown value changed to: " + currentValue);
 
   // Optional: Update a results paragraph
-//   document.getElementById("result").textContent = currentValue;
+  const total = document.createElement('p');
+  total.classList.add("prelim-total-amount");
+
+  total.textContent = "$" + currentValue;
+
+  const prelimTotal = document.getElementById("prelim-total");
+
+  prelimTotal.appendChild((total));
 }
 
 // 3. Add the 'change' event listener to the select element
-roomPicker.addEventListener("change", handleSelectChange);
+roomPickerTotal.addEventListener("change", handleSelectChange);

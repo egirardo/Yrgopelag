@@ -42,9 +42,9 @@
                         <label for="room_picker" class="form-label mt-4 top">Choose a room:</label>
                         <select name="room_picker" class="form-select" id="room_picker" required>
                             <option value="">-Select-</option>
-                            <option value="budget"><?= $rooms[0]['rank']; ?> - $<?= $rooms[0]['price']; ?></option>
-                            <option value="standard"><?= $rooms[1]['rank']; ?> - $<?= $rooms[1]['price']; ?></option>
-                            <option value="luxury"><?= $rooms[2]['rank']; ?> - $<?= $rooms[2]['price']; ?></option>
+                            <?php foreach ($rooms as $room) : ?>
+                                <option value="<?= $room['rank']; ?>"><?= $room['rank']; ?> - $<?= $room['price']; ?></option>
+                            <?php endforeach; ?>
                         </select>
 
                         <label for="event_date" class="form-label mt-4">Start Date:</label>

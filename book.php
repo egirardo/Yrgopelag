@@ -6,49 +6,68 @@
 
     <h1>Book your stay now!</h1>
     <div class="calendar-datepicker-container">
-        <div class="calendar-key">
-            <h5>Key:</h5>
-            <div class="key-day">
-                <p>Booked:</p>
-                <div class="day booked"></div>
+        <div class="calendar-key-container">
+            <div class="key-container">
+                <h5>Key:</h5>
+                <div class="key-day">
+                    <p>Booked:</p>
+                    <div class="day booked"></div>
+                </div>
+                <div class="key-day">
+                    <p>Available:</p>
+                    <div class="day"></div>
+                </div>
             </div>
-            <div class="key-day">
-                <p>Available:</p>
-                <div class="day"></div>
+            <div class="calendar-container">
+                <h4 class="month">January</h4>
+                <p class="month">Availability</p>
+                <section class="calendar">
+                    <?php
+                    for ($i = 1; $i <= 31; $i++) :
+                    ?>
+                        <?php if (in_array($i, $admin['booked'])) : ?>
+                            <div class="day booked"><?= $i; ?></div>
+                        <?php else : ?>
+                            <div class="day"><?= $i; ?></div>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </section>
             </div>
-        </div>
-        <div class="calendar-container">
-            <h4 class="month">January</h4>
-            <p class="month">Availability</p>
-            <section class="calendar">
-                <?php
-                for ($i = 1; $i <= 31; $i++) :
-                ?>
-                    <?php if (in_array($i, $admin['booked'])) : ?>
-                        <div class="day booked"><?= $i; ?></div>
-                    <?php else : ?>
-                        <div class="day"><?= $i; ?></div>
-                    <?php endif; ?>
-                <?php endfor; ?>
-            </section>
         </div>
         <div class="date-picker">
             <form method="POST" action="process_booking.php">
-                <!-- make process_booking.php file -->
-                <label for="room_picker" class="form-label mt-4">Choose a room:</label>
-                <select name="room_picker" class="form-select" id="room_picker" required>
-                    <option value="">--Select One:--</option>
-                    <option value="budget"><?= $rooms[0]['rank']; ?> - $<?= $rooms[0]['price']; ?></option>
-                    <option value="standard"><?= $rooms[1]['rank']; ?> - $<?= $rooms[1]['price']; ?></option>
-                    <option value="luxury"><?= $rooms[2]['rank']; ?> - $<?= $rooms[2]['price']; ?></option>
-                </select>
+                <div class="selections">
+                    <!-- make process_booking.php file -->
+                    <fieldset class="room-dates">
+                        <label for="room_picker" class="form-label mt-4 top">Choose a room:</label>
+                        <select name="room_picker" class="form-select" id="room_picker" required>
+                            <option value="">-Select-</option>
+                            <option value="budget"><?= $rooms[0]['rank']; ?> - $<?= $rooms[0]['price']; ?></option>
+                            <option value="standard"><?= $rooms[1]['rank']; ?> - $<?= $rooms[1]['price']; ?></option>
+                            <option value="luxury"><?= $rooms[2]['rank']; ?> - $<?= $rooms[2]['price']; ?></option>
+                        </select>
 
-                <label for="event_date" class="form-label mt-4">Start Date:</label>
-                <input type="date" class="form-control" id="start_date" name="event_date" value="<?= $admin['start-date']; ?>" required>
+                        <label for="event_date" class="form-label mt-4">Start Date:</label>
+                        <input type="date" class="form-control" id="start_date" name="event_date" value="<?= $admin['start-date']; ?>" required>
 
-                <label for="event_date" class="form-label mt-4">End Date:</label>
-                <input type="date" class="form-control" id="end_date" name="event_date" value="<?= $admin['end-date']; ?>" required>
+                        <label for="event_date" class="form-label mt-4">End Date:</label>
+                        <input type="date" class="form-control" id="end_date" name="event_date" value="<?= $admin['end-date']; ?>" required>
+                    </fieldset>
+                    <fieldset class="addOns">
+                        <legend class="form-label mt-4 top">Additional Actvities</legend>
+
+                        <?php foreach ($features as $feature) : ?>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="<?= $feature['feature']; ?>">
+                                <label class="form-check-label" for="<?= $feature['feature']; ?>">
+                                    <?= $feature['feature'] . " - $" . $feature['price']; ?>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                    </fieldset>
+                </div>
                 <input type="submit" value="Book Now">
+                <!-- need to fix styling on calendar and arrow icons for form -->
             </form>
         </div>
 

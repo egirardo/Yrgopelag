@@ -35,19 +35,19 @@
         <div class="date-picker">
             <form method="POST" action="process_booking.php">
                 <!-- make process_booking.php file -->
-                <label for="room_picker">Choose a room:</label>
-                <select name="room_picker" id="room_picker" required>
-                    <option value="">--Please choose an option--</option>
+                <label for="room_picker" class="form-label mt-4">Choose a room:</label>
+                <select name="room_picker" class="form-select" id="room_picker" required>
+                    <option value="">--Select One:--</option>
                     <option value="budget"><?= $rooms[0]['rank']; ?> - $<?= $rooms[0]['price']; ?></option>
                     <option value="standard"><?= $rooms[1]['rank']; ?> - $<?= $rooms[1]['price']; ?></option>
                     <option value="luxury"><?= $rooms[2]['rank']; ?> - $<?= $rooms[2]['price']; ?></option>
                 </select>
 
-                <label for="event_date">Start Date:</label>
-                <input type="date" id="start_date" name="event_date" value="<?= $admin['start-date']; ?>" required>
+                <label for="event_date" class="form-label mt-4">Start Date:</label>
+                <input type="date" class="form-control" id="start_date" name="event_date" value="<?= $admin['start-date']; ?>" required>
 
-                <label for="event_date">End Date:</label>
-                <input type="date" id="end_date" name="event_date" value="<?= $admin['end-date']; ?>" required>
+                <label for="event_date" class="form-label mt-4">End Date:</label>
+                <input type="date" class="form-control" id="end_date" name="event_date" value="<?= $admin['end-date']; ?>" required>
                 <input type="submit" value="Book Now">
             </form>
         </div>

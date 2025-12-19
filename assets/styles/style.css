@@ -10,6 +10,10 @@ form {
     gap: .5rem;
 }
 
+#room_picker.form-select {
+  color: #55595c;
+}
+
 .tc-button {
   position: fixed;
   bottom: 1.3rem;

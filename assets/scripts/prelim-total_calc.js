@@ -13,11 +13,13 @@ function handleSelectChange(event) {
   const total = document.createElement('p');
   total.classList.add("prelim-total-amount");
 
-  total.textContent = "$" + currentValue;
-
+  
+  total.innerHTML = "$" + currentValue;
+  
   const prelimTotal = document.getElementById("prelim-total");
-
+  
   prelimTotal.appendChild((total));
+  total.innerHTML = '';
 }
 
 // 3. Add the 'change' event listener to the select element

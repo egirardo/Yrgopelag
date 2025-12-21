@@ -31,7 +31,21 @@ foreach ($bookings as $booking) {
     $endDate = substr($booking['end_date'], 8, 2);
     $bookingRange = range($startDate, $endDate);
 
-    $admin['booked'] = array_merge($admin['booked'], $bookingRange);
+    $admin['budgetBooked'] = array_merge($admin['budgetBooked'], $bookingRange);
+}
+foreach ($bookings as $booking) {
+    $startDate = substr($booking['start_date'], 8, 2);
+    $endDate = substr($booking['end_date'], 8, 2);
+    $bookingRange = range($startDate, $endDate);
+
+    $admin['standardBooked'] = array_merge($admin['standardBooked'], $bookingRange);
+}
+foreach ($bookings as $booking) {
+    $startDate = substr($booking['start_date'], 8, 2);
+    $endDate = substr($booking['end_date'], 8, 2);
+    $bookingRange = range($startDate, $endDate);
+
+    $admin['luxuryBooked'] = array_merge($admin['luxuryBooked'], $bookingRange);
 }
 
 

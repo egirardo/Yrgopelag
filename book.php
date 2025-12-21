@@ -22,10 +22,43 @@
                 <h4 class="month">January</h4>
                 <p class="month">Availability</p>
                 <section class="calendar">
+                    <!-- possible solution is to make three separate calendars with different ids and different booking arrays, toggle a hidden tag in js to show/hide the chosen calendar -->
                     <?php
                     for ($i = 1; $i <= 31; $i++) :
                     ?>
-                        <?php if (in_array($i, $admin['booked'])) : ?>
+                        <div class="day"><?= $i; ?></div>
+                    <?php endfor; ?>
+                </section>
+                <section class="budgetCalendar hidden">
+                    <!-- possible solution is to make three separate calendars with different ids and different booking arrays, toggle a hidden tag in js to show/hide the chosen calendar -->
+                    <?php
+                    for ($i = 1; $i <= 31; $i++) :
+                    ?>
+                        <?php if (in_array($i, $admin['budgetBooked'])) : ?>
+                            <div class="day booked"><?= $i; ?></div>
+                        <?php else : ?>
+                            <div class="day"><?= $i; ?></div>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </section>
+                <section class="standardCalendar hidden">
+                    <!-- possible solution is to make three separate calendars with different ids and different booking arrays, toggle a hidden tag in js to show/hide the chosen calendar -->
+                    <?php
+                    for ($i = 1; $i <= 31; $i++) :
+                    ?>
+                        <?php if (in_array($i, $admin['standardBooked'])) : ?>
+                            <div class="day booked"><?= $i; ?></div>
+                        <?php else : ?>
+                            <div class="day"><?= $i; ?></div>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </section>
+                <section class="luxuryCalendar hidden">
+                    <!-- possible solution is to make three separate calendars with different ids and different booking arrays, toggle a hidden tag in js to show/hide the chosen calendar -->
+                    <?php
+                    for ($i = 1; $i <= 31; $i++) :
+                    ?>
+                        <?php if (in_array($i, $admin['luxuryBooked'])) : ?>
                             <div class="day booked"><?= $i; ?></div>
                         <?php else : ?>
                             <div class="day"><?= $i; ?></div>
@@ -35,7 +68,7 @@
             </div>
         </div>
         <div class="date-picker">
-            <form method="POST" action="process_booking.php">
+            <form method="POST" action="book.php" id="selection">
                 <div class="selections">
                     <!-- make process_booking.php file -->
                     <fieldset class="room-dates">
@@ -68,6 +101,21 @@
                             <h6>Total:</h6>
                         </div>
                     </fieldset>
+                    <fieldset class="user-info">
+
+                        <div>
+                            <label class="col-form-label mt-4" for="user">Username</label>
+                            <input type="text" class="form-control" placeholder="First Name" id="user">
+                        </div>
+                        <div>
+                            <label class="col-form-label mt-4" for="transferCode">Transfer Code</label>
+                            <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode">
+                        </div>
+                        <div>
+                            <label class="col-form-label mt-4" for="totalCost">Confirm Total:</label>
+                            <input type="text" class="form-control" placeholder="Enter total cost" id="totalCost">
+                        </div>
+                    </fieldset>
                 </div>
                 <input type="submit" value="Book Now">
                 <!-- need to fix styling on calendar and arrow icons for form -->
@@ -77,7 +125,7 @@
 
 
     <!-- once user hits submit on the date-picker section, a checkout section appears at the bottom summarizing their choices and asking for their username, transfercode, and amount. features can also be added here. -->
-    <div class="check-out hidden">
+    <!-- <div class="check-out hidden">
         <div class="card border-secondary mb-3" style="max-width: 20rem;">
             <div class="card-header">Order</div>
             <div class="card-body">
@@ -89,21 +137,24 @@
             <div class="card-header">Checkout</div>
             <div class="card-body">
                 <h4 class="card-title">Complete Your Order:</h4>
-                <div>
-                    <label class="col-form-label mt-4" for="user">Username</label>
-                    <input type="text" class="form-control" placeholder="First Name" id="user">
-                </div>
-                <div>
-                    <label class="col-form-label mt-4" for="transferCode">Transfer Code</label>
-                    <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode">
-                </div>
-                <div>
-                    <label class="col-form-label mt-4" for="totalCost">Confirm Total:</label>
-                    <input type="text" class="form-control" placeholder="Enter total shown in order panel" id="totalCost">
-                </div>
+                <form method="POST" action="process_booking.php" id="selection">
+                    <div>
+                        <label class="col-form-label mt-4" for="user">Username</label>
+                        <input type="text" class="form-control" placeholder="First Name" id="user">
+                    </div>
+                    <div>
+                        <label class="col-form-label mt-4" for="transferCode">Transfer Code</label>
+                        <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode">
+                    </div>
+                    <div>
+                        <label class="col-form-label mt-4" for="totalCost">Confirm Total:</label>
+                        <input type="text" class="form-control" placeholder="Enter total cost" id="totalCost">
+                    </div>
+                    <input type="submit" value="Book Now">
+                </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- below code will be changed later to take on final booking processing -->

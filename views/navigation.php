@@ -11,8 +11,13 @@
                 <a class="nav-link" href="/about.php">About</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/book.php">Book now!</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Book Now!</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="book.php">Budget Room</a>
+                    <a class="dropdown-item" href="book.php">Standard Room</a>
+                    <a class="dropdown-item" href="book.php">Luxury Room</a>
+                </div>
             </li>
         </ul>
     </div>

@@ -1,13 +1,46 @@
-article {
-    margin: 2rem;
+.hidden {
+  display: none;
 }
 
+article {
+  margin: 2rem;
+}
+
+.rooms-display {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.room {
+  display: flex;
+  justify-content: space-between;
+  width: 90vw;
+}
+.room-image-container {
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+}
+.room-image-container img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+.room-info-container {
+  width: 60vw;
+}
 form {
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    padding: 1rem;
-    gap: .5rem;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  padding: 1rem;
+  gap: .5rem;
 }
 
 .mt-4.top{

@@ -7,7 +7,8 @@ function handleSelectChange(event) {
   const currentValue = event.target.value;
   
   // Example: Log the value to the console or update the DOM
-  console.log("Dropdown value changed to: " + currentValue);
+  console.log("the current room is: " + currentValue);
+
 
   // Optional: Update a results paragraph
 //   document.getElementById("result").textContent = currentValue;

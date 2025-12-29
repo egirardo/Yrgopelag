@@ -1,31 +1,10 @@
-<?php require_once __DIR__ . '/app/autoload.php'; ?>
-<?php require_once __DIR__ . '/app/functions.php'; ?>
-<?php require_once __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/app/autoload.php'; ?>
+<?php require __DIR__ . '/views/header.php'; ?>
 
-<?php
-
-$room = loadRoom($db);
-
-if (!$room) {
-    die('Invalid room');
-}
-
-$roomId = (int)$room['id'];
-
-$year  = 2026;
-$month = 1;
-
-$bookedDays = getBookedDaysForMonth(
-    $db,
-    (int)$room['id'],
-    $year,
-    $month
-);
-?>
 
 <article class="booking-dates" data-bs-theme="dark">
 
-    <h1>Book Your <?= $room['rank'] ?> Room Now!</h1>
+    <h1>Book your stay now!</h1>
     <div class="calendar-datepicker-container">
         <div class="calendar-key-container">
             <div class="key-container">
@@ -44,14 +23,43 @@ $bookedDays = getBookedDaysForMonth(
                 <p class="month">Availability</p>
                 <section class="calendar">
                     <?php
-                    $daysInMonth = (int)date('t');
-
-                    for ($i = 1; $i <= $daysInMonth; $i++) {
-                        $class = in_array($i, $bookedDays, true) ? 'day booked' : 'day';
-                        echo "<div class=\"$class\">$i</div>";
-                    }
+                    for ($i = 1; $i <= 31; $i++) :
                     ?>
-
+                        <div class="day"><?= $i; ?></div>
+                    <?php endfor; ?>
+                </section>
+                <section class="budgetCalendar hidden">
+                    <?php
+                    for ($i = 1; $i <= 31; $i++) :
+                    ?>
+                        <?php if (in_array($i, $admin['budgetBooked'])) : ?>
+                            <div class="day booked"><?= $i; ?></div>
+                        <?php else : ?>
+                            <div class="day"><?= $i; ?></div>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </section>
+                <section class="standardCalendar hidden">
+                    <?php
+                    for ($i = 1; $i <= 31; $i++) :
+                    ?>
+                        <?php if (in_array($i, $admin['standardBooked'])) : ?>
+                            <div class="day booked"><?= $i; ?></div>
+                        <?php else : ?>
+                            <div class="day"><?= $i; ?></div>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </section>
+                <section class="luxuryCalendar hidden">
+                    <?php
+                    for ($i = 1; $i <= 31; $i++) :
+                    ?>
+                        <?php if (in_array($i, $admin['luxuryBooked'])) : ?>
+                            <div class="day booked"><?= $i; ?></div>
+                        <?php else : ?>
+                            <div class="day"><?= $i; ?></div>
+                        <?php endif; ?>
+                    <?php endfor; ?>
                 </section>
             </div>
         </div>
@@ -60,6 +68,14 @@ $bookedDays = getBookedDaysForMonth(
                 <div class="selections">
                     <!-- make process_booking.php file -->
                     <fieldset class="room-dates">
+                        <label for="room_picker" class="form-label mt-4 top">Choose a room:</label>
+                        <select name="room_picker" class="form-select" id="room_picker" required>
+                            <option value="">-Select-</option>
+                            <?php foreach ($rooms as $room) : ?>
+                                <option id="<?= $room['rank']; ?>" value="<?= $room['price']; ?>"><?= $room['rank']; ?> - $<?= $room['price']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+
                         <label for="event_date" class="form-label mt-4">Start Date:</label>
                         <input type="date" class="form-control" id="start_date" name="event_date" value="<?= $admin['start-date']; ?>" required>
 
@@ -102,6 +118,58 @@ $bookedDays = getBookedDaysForMonth(
             </form>
         </div>
     </div>
+
+
+    <!-- once user hits submit on the date-picker section, a checkout section appears at the bottom summarizing their choices and asking for their username, transfercode, and amount. features can also be added here. -->
+    <!-- <div class="check-out hidden">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Order</div>
+            <div class="card-body">
+                <h4 class="card-title">Order Summary:</h4>
+                <p class="card-text order"></p>
+            </div>
+        </div>
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Checkout</div>
+            <div class="card-body">
+                <h4 class="card-title">Complete Your Order:</h4>
+                <form method="POST" action="process_booking.php" id="selection">
+                    <div>
+                        <label class="col-form-label mt-4" for="user">Username</label>
+                        <input type="text" class="form-control" placeholder="First Name" id="user">
+                    </div>
+                    <div>
+                        <label class="col-form-label mt-4" for="transferCode">Transfer Code</label>
+                        <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode">
+                    </div>
+                    <div>
+                        <label class="col-form-label mt-4" for="totalCost">Confirm Total:</label>
+                        <input type="text" class="form-control" placeholder="Enter total cost" id="totalCost">
+                    </div>
+                    <input type="submit" value="Book Now">
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- below code will be changed later to take on final booking processing -->
+    <!-- <form action="app/users/book.php" method="POST">
+        <label class="form-label mt-4">Withdraw</label>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input class="form-control" type="username" name="username" id="username" placeholder="Sbargle" required>
+            <small class="form-text">Please provide your username (first name).</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="transferCode" class="form-label">Transfer Code</label>
+            <input class="form-control" type="text" name="transferCode" id="transferCode" required>
+            <small class="form-text">Please provide your centralbank transfer code.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form> -->
 </article>
 
 <button class="btn btn-primary tc-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#transferCodeService" aria-controls="transferCodeService">transferCode Service</button>
@@ -140,4 +208,4 @@ $bookedDays = getBookedDaysForMonth(
     </div>
 </div>
 
-<?php require_once __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__ . '/views/footer.php'; ?>

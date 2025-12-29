@@ -6,6 +6,13 @@ article {
   margin: 2rem;
 }
 
+.hero {
+  height: 85vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+
 .rooms-display {
   width: 100vw;
   display: flex;
@@ -18,23 +25,30 @@ article {
 
 .room {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   width: 90vw;
+  height: 300px;
+
 }
 .room-image-container {
   height: 300px;
   width: 300px;
   overflow: hidden;
 }
-.room-image-container img{
+.room-image-container img, .hero img{
   width: 100%;
   height: 100%;
   object-fit: cover;
 
 }
 .room-info-container {
-  width: 60vw;
+  width: 55vw;
+  height: 100%;
+  padding: 0 1rem 0 3rem;
+  border-left: 2px solid black;
 }
+
 form {
   display: flex;
   flex-direction: column;

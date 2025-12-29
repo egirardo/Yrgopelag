@@ -14,9 +14,9 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Book Now!</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="book.php">Budget Room</a>
-                    <a class="dropdown-item" href="book.php">Standard Room</a>
-                    <a class="dropdown-item" href="book.php">Luxury Room</a>
+                    <a class="dropdown-item" href="book.php?room_id=1">Budget Room</a>
+                    <a class="dropdown-item" href="book.php?room_id=2">Standard Room</a>
+                    <a class="dropdown-item" href="book.php?room_id=3">Luxury Room</a>
                 </div>
             </li>
         </ul>

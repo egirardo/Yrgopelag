@@ -6,6 +6,11 @@ article {
   margin: 2rem;
 }
 
+#logo {
+  height: 15vh;
+  margin-left: 1rem;
+}
+
 .hero {
   height: 85vh;
   width: 100vw;

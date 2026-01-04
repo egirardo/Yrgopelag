@@ -14,14 +14,21 @@ try {
 } catch (Exception $e) {
     redirect('index.php');
 }
+
+$checkIn = new DateTime($booking['start_date']);
+$checkOut = new DateTime($booking['end_date']);
+$nights = $checkIn->diff($checkOut)->days;
+$roomTotal = (int)$booking['room_price'] * $nights;
 ?>
 
 <h1>Booking Confirmed</h1>
 
-<p>Booking ID: <?= $booking['id'] ?></p>
-<p>Room: <?= $booking['room_rank']; ?></p>
+<p>Booking ID: <?= $booking['id']; ?></p>
+<p>Room: <?= ucfirst($booking['room_rank']); ?></p>
 <p>Check-in: <?= $booking['start_date']; ?> 15:00</p>
 <p>Check-out: <?= $booking['end_date']; ?> 11:00</p>
+<p>Number of Nights: <?= $nights; ?> ($<?= $booking['room_price']; ?>/night)</p>
+<p>Cost for Room: $<?= $roomTotal; ?></p>
 
 <h3>Selected Activities</h3>
 

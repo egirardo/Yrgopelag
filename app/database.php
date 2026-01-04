@@ -129,7 +129,7 @@ function saveBooking(
 function getBooking(PDO $db, int $bookingId): array
 {
     $stmt = $db->prepare("
-        SELECT b.*, r.rank AS room_rank
+        SELECT b.*, r.rank AS room_rank, r.price AS room_price
         FROM bookings b
         JOIN rooms r ON r.id = b.room_id
         WHERE b.id = ?

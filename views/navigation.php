@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
     <div class="container-fluid">
         <div class="logo-container"></div>
-        <a class="navbar-brand" href="#"><?php echo $config['title']; ?></a>
+        <a class="navbar-brand" href="/index.php"><?php echo $config['title']; ?></a>
 
         <ul class="navbar-nav">
             <li class="nav-item">

@@ -7,7 +7,7 @@
 <div class="hero">
     <img src="/assets/images/hero.png" alt="beautiful luxury resort in forest">
 </div>
-<div class=" rooms-display">
+<div class="rooms-display">
     <?php foreach ($rooms as $room) : ?>
         <div class="room">
             <div class="room-image-container">

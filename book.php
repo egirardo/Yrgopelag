@@ -10,6 +10,12 @@ if (!$room) {
     die('Invalid room');
 }
 
+if (isset($_GET['error'])) {
+    echo '<div class="alert alert-danger" role="alert">';
+    echo htmlspecialchars($_GET['error']);
+    echo '</div>';
+}
+
 $roomId = (int)$room['id'];
 
 $year  = 2026;
@@ -17,10 +23,12 @@ $month = 1;
 
 $bookedDays = getBookedDaysForMonth(
     $db,
-    (int)$room['id'],
+    $roomId,
     $year,
     $month
 );
+
+$daysInMonth = (int)date('t');
 ?>
 
 <article class="booking-dates" data-bs-theme="dark">
@@ -44,7 +52,6 @@ $bookedDays = getBookedDaysForMonth(
                 <p class="month">Availability</p>
                 <section class="calendar">
                     <?php
-                    $daysInMonth = (int)date('t');
 
                     for ($i = 1; $i <= $daysInMonth; $i++) {
                         $class = in_array($i, $bookedDays, true) ? 'day booked' : 'day';
@@ -56,44 +63,46 @@ $bookedDays = getBookedDaysForMonth(
             </div>
         </div>
         <div class="date-picker">
-            <form method="POST" action="book.php" id="selection">
+            <form method="POST" action="./app/users/process_booking.php" id="selection" data-room-price="<?= (int)$room['price']; ?>">
+                <input type="hidden" name="room_id" value="<?= (int)$room['id'] ?>">
                 <div class="selections">
-                    <!-- make process_booking.php file -->
                     <fieldset class="room-dates">
-                        <label for="event_date" class="form-label mt-4">Start Date:</label>
-                        <input type="date" class="form-control" id="start_date" name="event_date" value="<?= $admin['start-date']; ?>" required>
+                        <label for="start_date" class="form-label mt-4">Start Date:</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= $admin['start-date']; ?>" required>
 
-                        <label for="event_date" class="form-label mt-4">End Date:</label>
-                        <input type="date" class="form-control" id="end_date" name="event_date" value="<?= $admin['end-date']; ?>" required>
+                        <label for="end_date" class="form-label mt-4">End Date:</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= $admin['end-date']; ?>" required>
                     </fieldset>
                     <fieldset class="addOns">
                         <legend class="form-label mt-4 top">Additional Actvities</legend>
 
                         <?php foreach ($features as $feature) : ?>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="<?= $feature['price'] ?>" id="<?= $feature['feature']; ?>">
-                                <label class="form-check-label" for="<?= $feature['feature']; ?>">
-                                    <?= $feature['feature'] . " - $" . $feature['price']; ?>
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="activities[]"
+                                    value="<?= (int)$feature['id'] ?>"
+                                    id="feature-<?= (int)$feature['id'] ?>" data-price="<?= (int)$feature['price'] ?>">
+                                <label class="form-check-label" for="feature-<?= (int)$feature['id'] ?>">
+                                    <?= $feature['feature'] ?> — $<?= (int)$feature['price'] ?>
                                 </label>
                             </div>
                         <?php endforeach; ?>
-                        <div id="prelim-total">
-                            <h6>Total:</h6>
-                        </div>
                     </fieldset>
                     <fieldset class="user-info">
 
                         <div>
                             <label class="col-form-label mt-4" for="user">Username</label>
-                            <input type="text" class="form-control" placeholder="First Name" id="user">
+                            <input type="text" class="form-control" placeholder="First Name" id="user" name="user" required>
                         </div>
                         <div>
                             <label class="col-form-label mt-4" for="transferCode">Transfer Code</label>
-                            <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode">
+                            <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode" name="transfer_code" required>
                         </div>
                         <div>
                             <label class="col-form-label mt-4" for="totalCost">Confirm Total:</label>
-                            <input type="text" class="form-control" placeholder="Enter total cost" id="totalCost">
+                            <input type="text" class="form-control" placeholder="Enter total cost" id="totalCost" name="total_cost" readonly>
                         </div>
                     </fieldset>
                 </div>
@@ -135,7 +144,6 @@ $bookedDays = getBookedDaysForMonth(
             </div>
 
             <button type="submit" class="btn btn-primary">Get transferCode</button>
-            <!-- if !isset $session {show above code} else {transfercode: x amount: x}set up session variable so that when session is set then the display is instead your transfer code: x amount: x -->
         </form>
     </div>
 </div>

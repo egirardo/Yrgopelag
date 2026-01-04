@@ -97,6 +97,14 @@ form {
 }
 .addOns {
   padding: 0rem 0rem 0rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  height: 30%;
+}
+
+.addOns label {
+  display: block;
 }
 
 legend {
@@ -179,3 +187,4 @@ legend {
 .booked:hover {
     background: #d6caa5;
 }
+

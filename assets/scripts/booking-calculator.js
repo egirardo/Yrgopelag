@@ -8,7 +8,6 @@
     const end   = document.getElementById('end_date');
     const boxes = form.querySelectorAll('input[name="activities[]"]');
     const total = document.getElementById('totalCost');
-    const label = document.getElementById('prelim-total');
 
     function nights() {
         if (!start.value || !end.value) return 0;
@@ -27,7 +26,6 @@
     function update() {
         const t = nights() * roomPrice + activityTotal();
         total.value = t ? `$${t}` : '';
-        label.innerHTML = `<h6>Total:</h6> $${t}`;
     }
 
     start.addEventListener('change', update);

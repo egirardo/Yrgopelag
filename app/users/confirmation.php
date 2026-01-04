@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../autoload.php';
-require_once __DIR__ . '/../functions.php';
 require_once __DIR__ . '/../../views/header.php';
 
 if (!isset($_GET['booking_id'])) {

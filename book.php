@@ -1,5 +1,4 @@
 <?php require_once __DIR__ . '/app/autoload.php'; ?>
-<?php require_once __DIR__ . '/app/functions.php'; ?>
 <?php require_once __DIR__ . '/views/header.php'; ?>
 
 <?php

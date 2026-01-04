@@ -11,7 +11,10 @@ date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
 
 
-require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/helpers.php';
+require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/centralbank.php';
+require_once __DIR__ . '/calculations.php';
 
 $config = require_once __DIR__ . '/config.php';
 

@@ -1,0 +1,45 @@
+/* Page structure and layout */
+
+article {
+  margin: 2rem;
+}
+
+#logo {
+  height: 15vh;
+  margin-left: 1.5rem;
+}
+
+.hero {
+  height: 75vh;
+  width: 100vw;
+}
+
+.hero-image {
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  width: 90vw;
+  padding: 1rem;
+  border-bottom: 2px solid #b26229;
+  text-align: center;
+}
+
+.booking-title h1 {
+  margin-bottom: 0 !important;
+}

@@ -1,0 +1,13 @@
+/* Reusable UI components */
+
+.tc-button {
+  position: fixed;
+  bottom: 1.3rem;
+  right: 1.3rem;
+  z-index: 1000; 
+  background-color: #b26229;
+}
+
+.offcanvas-body form {
+  width: 90%;
+}

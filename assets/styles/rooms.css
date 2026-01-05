@@ -1,0 +1,39 @@
+/* Room listing styles */
+
+.rooms-display {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.room {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90vw;
+  height: 300px;
+  margin-bottom: 1rem;
+}
+
+.room-image-container {
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+}
+
+.room-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-info-container {
+  width: 55vw;
+  height: 100%;
+  padding: 0 1rem 0 3rem;
+  border-left: 2px solid #b26229;
+}

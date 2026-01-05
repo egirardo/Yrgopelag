@@ -1,0 +1,48 @@
+/* Review slider styles */
+
+.review-slider-container {
+  max-width: 40vw;
+  margin: 40px auto;
+  padding: 0 15px;
+  position: absolute;
+  left: 55vw;
+  top: 30vh;
+}
+
+/* This creates the "window" that hides overflowing content */
+.review-slides-wrapper {
+  overflow: hidden; 
+  position: relative;
+}
+
+/* This container holds all cards side-by-side and will be animated */
+.review-slides-inner {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+/* Each card takes up the full width of the wrapper at any given time */
+.review-card {
+  flex: 0 0 99%;
+  background-color: rgba(249, 249, 249, .75);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.review-text {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.author-name {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px 0;
+}

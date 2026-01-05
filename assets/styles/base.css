@@ -1,0 +1,43 @@
+/* Global utilities and base styles */
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+input[type="submit"] {
+  border-radius: 0;
+  border: none;
+  padding: .25rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.button-grow {
+  transition: all 0.3s ease-in-out;
+}
+
+.button-grow:hover {
+  transform: scale(1.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  padding: 1rem;
+  gap: .5rem;
+}
+
+.mt-4.top {
+  margin-top: 0 !important;
+}
+
+#room_picker.form-select {
+  color: #55595c;
+}

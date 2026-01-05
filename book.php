@@ -92,11 +92,11 @@ $daysInMonth = (int)date('t');
                     <fieldset class="user-info">
 
                         <div>
-                            <label class="col-form-label mt-4" for="user">Username</label>
+                            <label class="col-form-label mt-4" for="user">Username:</label>
                             <input type="text" class="form-control" placeholder="First Name" id="user" name="user" required>
                         </div>
                         <div>
-                            <label class="col-form-label mt-4" for="transferCode">Transfer Code</label>
+                            <label class="col-form-label mt-4" for="transferCode">Transfer Code:</label>
                             <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode" name="transfer_code" required>
                         </div>
                         <div>

@@ -25,6 +25,9 @@
         </div>
     </div>
 </div>
+<div class="booking-title">
+    <h1 class="title">Book Your Stay Now!</h1>
+</div>
 <div class="rooms-display">
     <?php foreach ($rooms as $room) : ?>
         <div class="room">
@@ -34,7 +37,7 @@
             <div class="room-info-container">
                 <h2><?= $room['rank']; ?> Room</h2>
                 <p><?= $room['description']; ?></p>
-                <a href="book.php?room_id=<?= $room['id'] ?>"><button type="button" class="btn btn-primary">Book Now!</button></a>
+                <a href="book.php?room_id=<?= $room['id'] ?>"><button type="button" class="btn btn-primary button-grow">Book Now!</button></a>
             </div>
         </div>
     <?php endforeach; ?>

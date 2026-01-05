@@ -6,18 +6,37 @@ article {
   margin: 2rem;
 }
 
+.btn {
+  border-radius: 0;
+}
+
+input[type="submit"] {
+  border-radius: 0;
+  border: none;
+  padding: .25rem;
+}
+
+
+.button-grow {
+  transition: all 0.3s ease-in-out;
+}
+
+.button-grow:hover {
+  transform: scale(1.1);
+}
+
 #logo {
   height: 15vh;
-  margin-left: 1rem;
+  margin-left: 1.5rem;
 }
 
 .hero {
-  height: 85vh;
+  height: 75vh;
   width: 100vw;
 }
 
 .hero-image {
-  height: 85vh;
+  height: 100%;
   width: 100vw;
   overflow: hidden;
   position: relative;
@@ -29,7 +48,7 @@ article {
   padding: 0 15px;
   position: absolute;
   left: 55vw;
-  top: 60vh;
+  top: 30vh;
 }
 
 /* This creates the "window" that hides overflowing content */
@@ -47,7 +66,7 @@ article {
 /* Each card takes up the full width of the wrapper at any given time */
 .review-card {
   flex: 0 0 99%; /* Ensures each card takes up the full width and doesn't shrink */
-  background-color: #f9f9f9;
+  background-color: rgba(249, 249, 249, .75);
   border-radius: 10px;
   padding: 20px;
   text-align: center;
@@ -70,6 +89,23 @@ article {
   margin-bottom: 10px 0;
 }
 
+.booking-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.title {
+  width: 90vw;
+  padding: 1rem;
+  border-bottom: 2px solid #b26229;
+  text-align: center;
+}
+
+.booking-title h1 {
+  margin-bottom: 0 !important;
+}
 
 .rooms-display {
   width: 100vw;
@@ -104,7 +140,7 @@ article {
   width: 55vw;
   height: 100%;
   padding: 0 1rem 0 3rem;
-  border-left: 2px solid black;
+  border-left: 2px solid #b26229;
 }
 
 form {
@@ -129,7 +165,7 @@ form {
   bottom: 1.3rem;
   right: 1.3rem;
   z-index: 1000; 
-
+  background-color: #b26229;
 }
 
 .offcanvas-body form {
@@ -165,8 +201,9 @@ form {
   display: block;
 }
 
-legend {
-  font-size: 1.25rem;
+legend.mt-4.top {
+  margin-top: 1.5rem !important;
+  font-size: 1rem;
 }
 
 .calendar-key-container {

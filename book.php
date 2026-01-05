@@ -73,7 +73,7 @@ $daysInMonth = (int)date('t');
                         <input type="date" class="form-control" id="end_date" name="end_date" value="<?= $admin['end-date']; ?>" required>
                     </fieldset>
                     <fieldset class="addOns">
-                        <legend class="form-label mt-4 top">Additional Actvities</legend>
+                        <legend class="form-label mt-4 top">Additional Actvities:</legend>
 
                         <?php foreach ($features as $feature) : ?>
                             <div class="form-check">
@@ -100,12 +100,12 @@ $daysInMonth = (int)date('t');
                             <input type="text" class="form-control" placeholder="Transfer Code" id="transferCode" name="transfer_code" required>
                         </div>
                         <div>
-                            <label class="col-form-label mt-4" for="totalCost">Confirm Total:</label>
-                            <input type="text" class="form-control" placeholder="Enter total cost" id="totalCost" name="total_cost" readonly>
+                            <label class="col-form-label mt-4" for="totalCost">Total:</label>
+                            <input type="text" class="form-control" placeholder="Total Cost" id="totalCost" name="total_cost" readonly>
                         </div>
                     </fieldset>
                 </div>
-                <input type="submit" value="Book Now">
+                <input type="submit" value="Complete Booking" class="btn-secondary">
                 <!-- need to fix styling on calendar and arrow icons for form -->
             </form>
         </div>

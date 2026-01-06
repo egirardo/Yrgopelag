@@ -10,7 +10,6 @@ const cards = document.querySelectorAll('.review-card');
 
     function scrollToNextReview() {
         currentIndex = (currentIndex + 1) % totalCards;
-        // Each card is 100% wide + 10px gap
         const offset = currentIndex * -100;
         const gapOffset = currentIndex * -10;
         innerContainer.style.transform = `translateX(calc(${offset}% + ${gapOffset}px))`;

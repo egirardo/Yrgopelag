@@ -106,7 +106,6 @@ $daysInMonth = (int)date('t');
                     </fieldset>
                 </div>
                 <input type="submit" value="Complete Booking" class="btn-secondary">
-                <!-- need to fix styling on calendar and arrow icons for form -->
             </form>
         </div>
     </div>

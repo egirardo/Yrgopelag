@@ -34,10 +34,10 @@ try {
         error_log('Receipt posting failed: ' . $e->getMessage());
     }
 
-    // Deposit (this consumes the code) !
+    // Deposit 
     depositTransferCode($transferCode);
 
-    // Save booking locally (DB transaction) !
+    // Save booking locally 
     $db->beginTransaction();
 
     if (bookingConflicts($db, $roomId, $startDate, $endDate)) {
@@ -52,11 +52,12 @@ try {
 
     $db->commit();
 
-    redirect('./confirmation.php?booking_id=' . $bookingId);
+    redirect('app/users/confirmation.php?booking_id=' . $bookingId);
 } catch (Exception $e) {
     if ($db->inTransaction()) {
         $db->rollBack();
     }
 
-    redirect('/../../book.php?room_id=' . $roomId . '&error=' . urlencode($e->getMessage()));
+    header('Location: ../../book.php?room_id=' . $roomId . '&error=' . urlencode($e->getMessage()));
+    exit;
 }

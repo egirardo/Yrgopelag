@@ -41,3 +41,7 @@ form {
 #room_picker.form-select {
   color: #55595c;
 }
+
+html {
+  scroll-behavior: smooth;
+}

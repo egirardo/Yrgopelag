@@ -4,9 +4,6 @@
   max-width: 40vw;
   margin: 40px auto;
   padding: 0 15px;
-  position: absolute;
-  left: 55vw;
-  top: 30vh;
 }
 
 /* This creates the "window" that hides overflowing content */

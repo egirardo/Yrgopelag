@@ -27,6 +27,22 @@ article {
   object-fit: cover;
 }
 
+.review-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    position: absolute;
+    left: 55vw;
+    top: 30vh;
+}
+
+.button-container {
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
 .booking-title {
   width: 100%;
   display: flex;

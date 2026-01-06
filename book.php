@@ -119,8 +119,27 @@ $daysInMonth = (int)date('t');
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <div>
+        <div class="mb-3">
             Enter your username, API key, and desired amount below, then hit submit to generate a transferCode from Yrgopelag Central Bank.
+        </div>
+
+        <div id="tc-error-container" class="hidden mb-3">
+            <div class="alert alert-danger" role="alert">
+                <strong>Error:</strong> <span id="tc-error-message"></span>
+            </div>
+        </div>
+
+        <div id="tc-success-container" class="hidden mb-3">
+            <div class="alert alert-success" role="alert">
+                <strong>Success!</strong> Your transferCode is:
+                <div class="mt-2 mb-3">
+                    <code id="tc-code-display"></code>
+                </div>
+                <button type="button" class="btn btn-sm btn-success" id="use-code-btn">
+                    Use This Code
+                </button>
+                <small class="d-block mt-2 text-muted">Click "Use This Code" to automatically fill the booking form.</small>
+            </div>
         </div>
 
         <form action="" method="POST" id="tc-offcanvas">
@@ -138,11 +157,14 @@ $daysInMonth = (int)date('t');
 
             <div class="mb-3">
                 <label for="amount" class="form-label">Amount</label>
-                <input class="form-control" type="number" name="amount" id="amount" required>
+                <input class="form-control" type="number" name="amount" id="amount" min="1" required>
                 <small class="form-text">Please confirm the amount you wish to withdraw.</small>
             </div>
 
-            <button type="submit" class="btn btn-primary">Get transferCode</button>
+            <button type="submit" class="btn btn-primary" id="tc-submit-btn">
+                <span id="tc-btn-text">Get transferCode</span>
+                <span id="tc-btn-spinner" class="spinner-border spinner-border-sm ms-2 hidden" role="status" aria-hidden="true"></span>
+            </button>
         </form>
     </div>
 </div>

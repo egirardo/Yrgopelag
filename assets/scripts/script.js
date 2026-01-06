@@ -6,8 +6,10 @@ const totalCards = cards.length;
 
 function scrollToNextReview() {
   currentIndex = (currentIndex + 1) % totalCards;
-  const offset = -currentIndex * 102;
-  innerContainer.style.transform = `translateX(${offset}%)`;
+  // Each card is 100% wide + 10px gap
+  const offset = currentIndex * -100;
+  const gapOffset = currentIndex * -10;
+  innerContainer.style.transform = `translateX(calc(${offset}% + ${gapOffset}px))`;
 }
 
 setInterval(scrollToNextReview, 4000);

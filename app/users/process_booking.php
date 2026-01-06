@@ -52,7 +52,8 @@ try {
 
     $db->commit();
 
-    redirect('app/users/confirmation.php?booking_id=' . $bookingId);
+    header('Location: confirmation.php?booking_id=' . $bookingId);
+    exit;
 } catch (Exception $e) {
     if ($db->inTransaction()) {
         $db->rollBack();

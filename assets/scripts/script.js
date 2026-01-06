@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
  
-// Reviews slider on index page - only run if elements exist
+// Reviews slider on index page
 const innerContainer = document.querySelector('.review-slides-inner');
 const cards = document.querySelectorAll('.review-card');
 
@@ -18,7 +18,7 @@ const cards = document.querySelectorAll('.review-card');
     setInterval(scrollToNextReview, 4000);
   }
 
-// Date validation - only run if date inputs exist
+// Date validation
 const startDateInput = document.getElementById("start_date");
 const endDateInput = document.getElementById("end_date");
 

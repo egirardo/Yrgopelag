@@ -2,6 +2,8 @@
 <?php require_once __DIR__ . '/views/header.php'; ?>
 
 <?php $rooms = getAllRooms($db);  ?>
+<?php $features = getAllFeatures($db);  ?>
+
 <div class="hero">
     <div class="hero-image">
         <img src="assets/images/hero.png" alt="beautiful luxury resort in forest">
@@ -36,10 +38,41 @@
         <h3>The Resort</h3>
         <p>Located on the island of Humanitopia, Sbargle's Luxury Building is a resort that offers guests a variety of stay options and several activities that humans enjoy. With beachfront views, Sbargle's is a paradise sure to bring you relaxation and comfort. Designed for year-round escapes, the temperature on the island is on average a comfortable 24°, perfect for swimming in the ocean or enjoying our amenities no matter the season.</p>
     </div>
+    <div class="resort-img">
+        <img src="assets/images/resort.png">
+    </div>
 </section>
 <section class="on-offer">
-    <div class="activities">
+    <div class="activities-title">
+        <h3>Play while you stay!</h3>
+        <p>Be sure to check out all that Sbargle has to offer during your stay at Sbargle's Luxury Building!</p>
+    </div>
 
+    <div class="activities-slider-container">
+        <div class="activities-wrapper">
+            <?php foreach ($features as $feature) : ?>
+                <div class="activities">
+                    <div class="activity-img">
+                        <img src="<?= $feature['image']; ?>" alt="<?= $feature['feature']; ?>">
+                    </div>
+                    <div class="activity-info">
+                        <h4><?= $feature['feature']; ?></h4>
+                        <p><strong>Price:</strong> $<?= $feature['price']; ?></p>
+                        <p><?= $feature['description']; ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="slider-controls">
+        <button id="slider-prev" class="slider-btn" aria-label="Previous activity">
+            &#8249;
+        </button>
+        <div class="slider-dots"></div>
+        <button id="slider-next" class="slider-btn" aria-label="Next activity">
+            &#8250;
+        </button>
     </div>
 </section>
 <div class="booking-title" id="booking-section">

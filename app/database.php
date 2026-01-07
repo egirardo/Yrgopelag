@@ -216,3 +216,11 @@ function getBookingActivities(PDO $db, int $bookingId): array
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// features functions
+
+function getAllFeatures(PDO $db): array
+{
+    $stmt = $db->query("SELECT * FROM features");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

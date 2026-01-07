@@ -5,12 +5,12 @@ article {
 }
 
 #logo {
-  height: 15vh;
+  height: 10vh;
   margin-left: 1.5rem;
 }
 
 .hero {
-  height: 75vh;
+  height: 85vh;
   width: 100vw;
 }
 
@@ -43,6 +43,144 @@ article {
     gap: 1rem;
 }
 
+
+/* Overview Section */
+.overview {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem auto;
+    align-items: center;
+    border-bottom: 2px solid var(--bs-primary-text-emphasis);
+    padding: 1rem 1rem 1.5rem 1rem;
+    width: 90vw;
+}
+
+.the-resort {
+    flex: 2;
+}
+.resort-img {
+    flex: 1.5;
+}
+
+.resort-img img {
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Activities section */
+
+.on-offer {
+    margin: 3rem auto;
+    max-width: 1200px;
+    width: 90vw;
+}
+
+.activities-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.activities-slider-container {
+    position: relative;
+    overflow: hidden;
+    padding: 0 0 1rem 0;
+}
+
+.activities-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.activities {
+    min-width: 100%;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.activity-img {
+    flex: 1;
+    max-width: 500px;
+}
+
+.activity-img img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.activity-info {
+    flex: 1;
+    padding: 1rem;
+}
+
+.activity-info h4 {
+    margin-bottom: 1rem;
+}
+
+.activity-info p {
+    margin-bottom: 0.5rem;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.slider-btn {
+    background: var(--bs-primary);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.slider-btn:hover {
+    background: var(--bs-primary-text-emphasis);
+    transform: scale(1.1);
+}
+
+.slider-btn:disabled {
+    background: rgba(255, 255, 255, 0.2);
+    cursor: not-allowed;
+    transform: scale(1);
+}
+
+.slider-dots {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+
+/* Booking section */
 .booking-title {
   width: 100%;
   display: flex;
@@ -52,7 +190,7 @@ article {
 .title {
   width: 50vw;
   padding: 1rem;
-  border-bottom: 2px solid #b26229;
+  border-bottom: 2px solid var(--bs-primary-text-emphasis);
   text-align: center;
 }
 

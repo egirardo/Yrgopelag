@@ -12,8 +12,9 @@
 
 .room {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  gap: 2rem;
   width: 90vw;
   height: 300px;
   margin-bottom: 1rem;
@@ -34,6 +35,6 @@
 .room-info-container {
   width: 55vw;
   height: 100%;
-  padding: 0 1rem 0 3rem;
-  border-left: 2px solid #b26229;
+  padding: 0 1rem 0 2rem;
+  border-left: 2px solid var(--bs-primary-text-emphasis);
 }

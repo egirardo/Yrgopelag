@@ -266,8 +266,33 @@ footer span {
   font-size: .65rem;
 }
 
-/* Confirmation */
+/* Confirmation Page */
 
 .confirmation-container {
   margin: 2rem;
+}
+
+/* About Page */
+
+.about-container {
+  display: flex;
+  align-items: center;
+}
+
+.about-info {
+  flex: 1;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.about-image {
+  flex: 1;
+  padding: 1rem;
+  margin: 2rem;
+}
+
+.about-image img {
+  width: 100%;
+  padding: 1rem;
+  border: solid 2px var(--bs-primary-text-emphasis);
 }

@@ -1,7 +1,7 @@
 <footer>
     <section class="footer-info">
         <div class="footer-info-container">
-            <img class="footer-logo" src="../assets/images/logo.png">
+            <img class="footer-logo" src="assets/images/logo.png">
             <h5>Rating: ☆ ☆ ☆</h5>
             <p>Sbargle aims to give you the best experience <em>humanly</em> possible. If there is anything Sbargle can improve upon please fill out a feedback form at the reception.</p>
         </div>

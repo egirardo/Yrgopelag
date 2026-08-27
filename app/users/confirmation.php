@@ -70,12 +70,12 @@ $roomTotal = (int)$booking['room_price'] * $nights;
     <div class="confirmation-container">
         <h1>Booking Confirmed</h1>
 
-        <p>Booking ID: <?= $booking['id']; ?></p>
-        <p>Room: <?= ucfirst($booking['room_rank']); ?></p>
-        <p>Check-in: <?= $booking['start_date']; ?> 15:00</p>
-        <p>Check-out: <?= $booking['end_date']; ?> 11:00</p>
-        <p>Number of Nights: <?= $nights; ?> ($<?= $booking['room_price']; ?>/night)</p>
-        <p>Cost for Room: $<?= $roomTotal; ?></p>
+        <p>Booking ID: <?= htmlspecialchars((string)$booking['id'], ENT_QUOTES, 'UTF-8'); ?></p>
+        <p>Room: <?= htmlspecialchars(ucfirst($booking['room_rank']), ENT_QUOTES, 'UTF-8'); ?></p>
+        <p>Check-in: <?= htmlspecialchars($booking['start_date'], ENT_QUOTES, 'UTF-8'); ?> 15:00</p>
+        <p>Check-out: <?= htmlspecialchars($booking['end_date'], ENT_QUOTES, 'UTF-8'); ?> 11:00</p>
+        <p>Number of Nights: <?= htmlspecialchars((string)$nights, ENT_QUOTES, 'UTF-8'); ?> ($<?= htmlspecialchars((string)$booking['room_price'], ENT_QUOTES, 'UTF-8'); ?>/night)</p>
+        <p>Cost for Room: $<?= htmlspecialchars((string)$roomTotal, ENT_QUOTES, 'UTF-8'); ?></p>
 
         <h3>Selected Activities</h3>
 
@@ -85,15 +85,15 @@ $roomTotal = (int)$booking['room_price'] * $nights;
             <ul>
                 <?php foreach ($activities as $activity): ?>
                     <li>
-                        <?= $activity['name']; ?>
-                        — $<?= (int)$activity['price']; ?>
+                        <?= htmlspecialchars($activity['name'], ENT_QUOTES, 'UTF-8'); ?>
+                        — $<?= htmlspecialchars((string)$activity['price'], ENT_QUOTES, 'UTF-8'); ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
 
         <h3>Total Cost</h3>
-        <p>$<?= (int)$booking['total_cost']; ?></p>
+        <p>$<?= htmlspecialchars((string)$booking['total_cost'], ENT_QUOTES, 'UTF-8'); ?></p>
 
         <p>Thank you for your booking! Your booking has been recorded.</p>
     </div>

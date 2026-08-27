@@ -1,3 +1,6 @@
+<?php
+/** @var array $config */
+?>
 <!DOCTYPE html>
 <html lang="en">
 

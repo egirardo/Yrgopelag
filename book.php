@@ -80,7 +80,11 @@ $monthName   = date('F', mktime(0, 0, 0, $month, 1, $year));
                 </div>
             </div>
             <div class="calendar-container">
-                <h4 class="month" id="calendar-month-title"><?= htmlspecialchars($monthName) ?></h4>
+                <div class="calendar-month-nav">
+                    <button type="button" class="calendar-nav-btn" id="prev-month" aria-label="Previous month">‹</button>
+                    <h4 class="month" id="calendar-month-title"><?= htmlspecialchars($monthName) ?></h4>
+                    <button type="button" class="calendar-nav-btn" id="next-month" aria-label="Next month">›</button>
+                </div>
                 <p class="month">Availability</p>
                 <section class="calendar" id="booking-calendar" data-room-id="<?= $roomId ?>" data-year="<?= $year ?>" data-month="<?= $month ?>">
                     <div class="weekday-headers">

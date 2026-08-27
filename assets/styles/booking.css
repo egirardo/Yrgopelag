@@ -83,6 +83,23 @@ legend.mt-4.top {
   height: 25vh;
 }
 
+.weekday-headers {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: .25rem;
+  margin: .5rem .5rem 0.5rem .5rem;
+  width: 100%;
+  max-width: 280px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #666;
+  padding: 0.25rem;
+}
+
 .day {
   aspect-ratio: 1 / 1;
   display: flex;
@@ -96,6 +113,16 @@ legend.mt-4.top {
   color: grey;
 }
 
+.day:not(.booked):not(.placeholder) {
+  cursor: pointer;
+}
+
+.day.placeholder {
+  background: transparent;
+  border: none;
+  cursor: default;
+}
+
 .day:hover {
   background: #eaeaea;
   transform: scale(1.05);
@@ -107,10 +134,43 @@ legend.mt-4.top {
   border-color: #7b4002;
   color: #b26229;
   font-weight: 600;
+  cursor: not-allowed;
 }
 
 .booked:hover {
   background: #d6caa5;
+}
+
+/* Clickable calendar selection states (Quick-Win #1) */
+.day.selected-start,
+.day.selected-end {
+  background: #2d6a4f;
+  border-color: #1b4332;
+  color: #fff;
+  font-weight: 600;
+}
+
+.day.in-range {
+  background: #b7e4c7;
+  border-color: #74c69d;
+  color: #1b4332;
+}
+
+.day.shake {
+  animation: day-shake 0.4s ease-in-out;
+}
+
+@keyframes day-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.calendar-feedback {
+  min-height: 1.5rem;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 0.25rem;
 }
 
 /* Transfer code display styling */
@@ -121,6 +181,15 @@ legend.mt-4.top {
   padding: 0.5rem;
   display: inline-block;
   border-radius: 0.25rem;
+}
+
+/* Auto-filled "Amount" field (Quick-Win #3): grey it out so it's clear
+   the value is computed, not typed in by the guest. */
+#amount:disabled,
+#amount[readonly] {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
 }
 
 /* Transfer code field highlight animation */

@@ -25,8 +25,7 @@ $roomTotal = (int)$booking['room_price'] * $nights;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $config['title']; ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title><?= htmlspecialchars($config['title'], ENT_QUOTES, 'UTF-8'); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="icon" href="../../assets/images/favicon-black.png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="../../assets/images/favicon-white.png" media="(prefers-color-scheme: dark)">

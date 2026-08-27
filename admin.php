@@ -37,14 +37,17 @@ $page = isset($_GET['page']) && is_string($_GET['page']) ? $_GET['page'] : 'dash
 
     <?php switch ($page):
         case 'bookings': ?>
-            <p>Bookings view coming soon.</p>
+            <?php require __DIR__ . '/views/admin/bookings_list.php'; ?>
             <?php break;
         case 'occupancy': ?>
-            <p>Occupancy stats view coming soon.</p>
+            <?php require __DIR__ . '/views/admin/occupancy_stats.php'; ?>
             <?php break;
         case 'dashboard':
         default: ?>
-            <p>Dashboard view coming soon.</p>
+            <div class="alert alert-info">
+                <h5>Welcome to the Admin Dashboard</h5>
+                <p>Use the tabs above to navigate between Bookings and Occupancy Stats.</p>
+            </div>
     <?php endswitch; ?>
 </div>
 

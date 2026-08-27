@@ -6,7 +6,7 @@
 
 <div class="hero">
     <div class="hero-image">
-        <img src="assets/images/hero.png" alt="beautiful luxury resort in forest">
+        <img src="/assets/images/hero.png" alt="beautiful luxury resort in forest">
     </div>
     <div class="review-buttons-container">
         <div class="review-slider-container">
@@ -39,7 +39,7 @@
         <p>Located on the island of Humanitopia, Sbargle's Luxury Building is a resort that offers guests a variety of stay options and several activities that humans enjoy. With beachfront views, Sbargle's is a paradise sure to bring you relaxation and comfort. Designed for year-round escapes, the temperature on the island is on average a comfortable 24°, perfect for swimming in the ocean or enjoying our amenities no matter the season.</p>
     </div>
     <div class="resort-img">
-        <img src="assets/images/resort.png">
+        <img src="/assets/images/resort.png">
     </div>
 </section>
 <section class="on-offer">

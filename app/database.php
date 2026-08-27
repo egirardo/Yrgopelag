@@ -224,3 +224,98 @@ function getAllFeatures(PDO $db): array
     $stmt = $db->query("SELECT * FROM features");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Admin functions
+
+/**
+ * Fetch every booking, joined with its room and guest details.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function getAllBookings(PDO $db): array
+{
+    $stmt = $db->query("
+        SELECT b.*, r.rank AS room_rank, r.price AS room_price, u.firstName AS guest_name
+        FROM bookings b
+        JOIN rooms r ON r.id = b.room_id
+        JOIN users u ON u.id = b.user_id
+        ORDER BY b.start_date DESC
+    ");
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Fetch bookings whose stay overlaps the given date range, joined with
+ * room and guest details.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function getBookingsByDateRange(PDO $db, string $start, string $end): array
+{
+    $stmt = $db->prepare("
+        SELECT b.*, r.rank AS room_rank, r.price AS room_price, u.firstName AS guest_name
+        FROM bookings b
+        JOIN rooms r ON r.id = b.room_id
+        JOIN users u ON u.id = b.user_id
+        WHERE b.start_date <= ? AND b.end_date >= ?
+        ORDER BY b.start_date ASC
+    ");
+
+    $stmt->execute([$end, $start]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Fetch bookings for a single room, joined with room and guest details.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function getBookingsByRoom(PDO $db, int $roomId): array
+{
+    $stmt = $db->prepare("
+        SELECT b.*, r.rank AS room_rank, r.price AS room_price, u.firstName AS guest_name
+        FROM bookings b
+        JOIN rooms r ON r.id = b.room_id
+        JOIN users u ON u.id = b.user_id
+        WHERE b.room_id = ?
+        ORDER BY b.start_date DESC
+    ");
+
+    $stmt->execute([$roomId]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Count the total number of bookings, for dashboard summary stats.
+ */
+function getBookingCount(PDO $db): int
+{
+    $stmt = $db->query("SELECT COUNT(*) FROM bookings");
+
+    return (int)$stmt->fetchColumn();
+}
+
+/**
+ * Sum total_cost across bookings, optionally restricted to bookings whose
+ * stay overlaps the given date range.
+ */
+function calculateTotalRevenue(PDO $db, ?string $startDate = null, ?string $endDate = null): int
+{
+    if ($startDate !== null && $endDate !== null) {
+        $stmt = $db->prepare("
+            SELECT SUM(total_cost)
+            FROM bookings
+            WHERE start_date <= ? AND end_date >= ?
+        ");
+        $stmt->execute([$endDate, $startDate]);
+    } else {
+        $stmt = $db->query("SELECT SUM(total_cost) FROM bookings");
+    }
+
+    $total = $stmt->fetchColumn();
+
+    return (int)($total ?? 0);
+}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/app/autoload.php';
 require_once __DIR__ . '/app/admin/auth.php';
+require_once __DIR__ . '/app/admin/database.php';
 
 if (($_GET['action'] ?? '') === 'logout') {
     logout();

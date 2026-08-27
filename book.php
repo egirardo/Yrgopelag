@@ -63,6 +63,7 @@ $daysInMonth = (int)date('t');
         </div>
         <div class="date-picker">
             <form method="POST" action="./app/users/process_booking.php" id="selection" data-room-price="<?= (int)$room['price']; ?>">
+                <input type="hidden" name="csrf_token" value="<?= generateCSRFToken(); ?>">
                 <input type="hidden" name="room_id" value="<?= (int)$room['id'] ?>">
                 <div class="selections">
                     <fieldset class="room-dates">

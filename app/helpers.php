@@ -104,3 +104,32 @@ function validateDateFormat(string $date): string
 
     return $date;
 }
+
+/**
+ * Generate a CSRF token and store in session
+ *
+ * @return string The CSRF token
+ */
+function generateCSRFToken(): string
+{
+    if (!isset($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    return $_SESSION['csrf_token'];
+}
+
+/**
+ * Validate a CSRF token against the session token
+ *
+ * @param string $token The token to validate
+ * @return bool True if token is valid, false otherwise
+ */
+function validateCSRFToken(string $token): bool
+{
+    if (!isset($_SESSION['csrf_token'])) {
+        return false;
+    }
+
+    return hash_equals($_SESSION['csrf_token'], $token);
+}

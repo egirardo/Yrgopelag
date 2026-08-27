@@ -8,6 +8,11 @@ try {
         redirect('index.php');
     }
 
+    // Validate CSRF token
+    if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
+        throw new Exception('CSRF token validation failed');
+    }
+
     // Validate input
     if (!isset($_POST['room_id']) || !isset($_POST['start_date']) || !isset($_POST['end_date']) ||
         !isset($_POST['transfer_code']) || !isset($_POST['user'])) {

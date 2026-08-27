@@ -1,4 +1,7 @@
-<?php require_once __DIR__ . '/app/autoload.php'; ?>
+<?php
+require_once __DIR__ . '/app/autoload.php';
+global $admin;
+?>
 
 <?php
 
@@ -42,9 +45,12 @@ $minSelectableDate = min(date('Y-m-d'), $admin['start-date']);
 $year  = (int)date('Y');
 $month = (int)date('n');
 
-if (!empty($prefillStartDate)) {
+// Only use the prefilled start date for calendar display if it came from form data (validation error).
+// Don't use admin's default date, as that causes the calendar to show the booking window start month
+// instead of the current month on fresh page load.
+if (!empty($formData['start_date'])) {
     try {
-        $validatedStartDate = validateDateFormat($prefillStartDate);
+        $validatedStartDate = validateDateFormat($formData['start_date']);
         $year  = (int)date('Y', strtotime($validatedStartDate));
         $month = (int)date('n', strtotime($validatedStartDate));
     } catch (Exception $e) {
@@ -133,7 +139,7 @@ $monthName   = date('F', mktime(0, 0, 0, $month, 1, $year));
                         <input type="date" class="form-control" id="end_date" name="end_date" value="<?= htmlspecialchars($prefillEndDate) ?>" min="<?= htmlspecialchars($minSelectableDate) ?>" required>
                     </fieldset>
                     <fieldset class="addOns">
-                        <legend class="form-label mt-4 top">Additional Actvities:</legend>
+                        <legend class="form-label mt-4 top">Additional Activities:</legend>
 
                         <?php foreach ($features as $feature) : ?>
                             <div class="form-check">

@@ -1,7 +1,4 @@
-<?php
-require_once __DIR__ . '/app/autoload.php';
-global $admin;
-?>
+<?php require_once __DIR__ . '/app/autoload.php'; ?>
 
 <?php
 
@@ -23,40 +20,8 @@ if (isset($_GET['error'])) {
 
 $roomId = (int)$room['id'];
 
-// Restore previously submitted form data after a validation error (Quick-Win #4).
-// process_booking.php stashes it in the session as one-time "flash" data.
-$formData = $_SESSION['booking_form_data'] ?? null;
-unset($_SESSION['booking_form_data']);
-
-$prefillStartDate  = $formData['start_date'] ?? $admin['start-date'];
-$prefillEndDate    = $formData['end_date'] ?? $admin['end-date'];
-$prefillActivities = $formData['activities'] ?? [];
-$prefillUser       = $formData['user'] ?? '';
-
-// The room's booking window (admin.php) is a fixed demo period. The "min" date
-// used to block past-date selection should be today's date, but must never be
-// later than the start of that booking window - otherwise the entire (fixed)
-// demo calendar would become unselectable if the server clock has moved past it.
-$minSelectableDate = min(date('Y-m-d'), $admin['start-date']);
-
-// Quick-Win #7: the availability grid must reflect whichever month the
-// start_date field is actually showing, rather than a hardcoded month.
-// Fall back to the current month if the prefilled start date is missing/invalid.
 $year  = (int)date('Y');
 $month = (int)date('n');
-
-// Only use the prefilled start date for calendar display if it came from form data (validation error).
-// Don't use admin's default date, as that causes the calendar to show the booking window start month
-// instead of the current month on fresh page load.
-if (!empty($formData['start_date'])) {
-    try {
-        $validatedStartDate = validateDateFormat($formData['start_date']);
-        $year  = (int)date('Y', strtotime($validatedStartDate));
-        $month = (int)date('n', strtotime($validatedStartDate));
-    } catch (Exception $e) {
-        // Invalid start date - fall back to the current month.
-    }
-}
 
 $bookedDays = getBookedDaysForMonth(
     $db,
@@ -86,57 +51,31 @@ $monthName   = date('F', mktime(0, 0, 0, $month, 1, $year));
                 </div>
             </div>
             <div class="calendar-container">
-                <div class="calendar-month-nav">
-                    <button type="button" class="calendar-nav-btn" id="prev-month" aria-label="Previous month">‹</button>
-                    <h4 class="month" id="calendar-month-title"><?= htmlspecialchars($monthName) ?></h4>
-                    <button type="button" class="calendar-nav-btn" id="next-month" aria-label="Next month">›</button>
-                </div>
+                <h4 class="month"><?= htmlspecialchars($monthName) ?></h4>
                 <p class="month">Availability</p>
-                <section class="calendar" id="booking-calendar" data-room-id="<?= $roomId ?>" data-year="<?= $year ?>" data-month="<?= $month ?>">
-                    <div class="weekday-headers">
-                        <div class="weekday">Sun</div>
-                        <div class="weekday">Mon</div>
-                        <div class="weekday">Tue</div>
-                        <div class="weekday">Wed</div>
-                        <div class="weekday">Thu</div>
-                        <div class="weekday">Fri</div>
-                        <div class="weekday">Sat</div>
-                    </div>
+                <section class="calendar">
                     <?php
-                    // Get first day of month (0=Sunday, 1=Monday, etc.)
-                    $firstDayOfWeek = (int)date('w', mktime(0, 0, 0, $month, 1, $year));
 
-                    // Add empty cells for days before the 1st
-                    for ($i = 0; $i < $firstDayOfWeek; $i++) {
-                        echo "<div class=\"day placeholder\"></div>";
-                    }
-
-                    // Add all days of the month
                     for ($i = 1; $i <= $daysInMonth; $i++) {
-                        $date  = sprintf('%04d-%02d-%02d', $year, $month, $i);
                         $class = in_array($i, $bookedDays, true) ? 'day booked' : 'day';
-                        echo "<div class=\"$class\" data-date=\"$date\">$i</div>";
+                        echo "<div class=\"$class\">$i</div>";
                     }
                     ?>
 
                 </section>
-                <p class="calendar-feedback" id="calendar-feedback"></p>
             </div>
         </div>
         <div class="date-picker">
-            <form method="POST" action="./app/users/process_booking.php" id="selection" data-room-price="<?= (int)$room['price']; ?>" novalidate>
+            <form method="POST" action="./app/users/process_booking.php" id="selection" data-room-price="<?= (int)$room['price']; ?>">
                 <input type="hidden" name="csrf_token" value="<?= generateCSRFToken(); ?>">
                 <input type="hidden" name="room_id" value="<?= (int)$room['id'] ?>">
-                <div id="form-error-container" class="hidden mb-3">
-                    <div class="alert alert-danger" role="alert" id="form-error-message"></div>
-                </div>
                 <div class="selections">
                     <fieldset class="room-dates">
                         <label for="start_date" class="form-label mt-4">Start Date:</label>
-                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= htmlspecialchars($prefillStartDate) ?>" min="<?= htmlspecialchars($minSelectableDate) ?>" required>
+                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= $admin['start-date']; ?>" required>
 
                         <label for="end_date" class="form-label mt-4">End Date:</label>
-                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= htmlspecialchars($prefillEndDate) ?>" min="<?= htmlspecialchars($minSelectableDate) ?>" required>
+                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= $admin['end-date']; ?>" required>
                     </fieldset>
                     <fieldset class="addOns">
                         <legend class="form-label mt-4 top">Additional Activities:</legend>
@@ -148,8 +87,7 @@ $monthName   = date('F', mktime(0, 0, 0, $month, 1, $year));
                                     type="checkbox"
                                     name="activities[]"
                                     value="<?= (int)$feature['id'] ?>"
-                                    id="feature-<?= (int)$feature['id'] ?>" data-price="<?= (int)$feature['price'] ?>"
-                                    <?= in_array((int)$feature['id'], $prefillActivities, true) ? 'checked' : '' ?>>
+                                    id="feature-<?= (int)$feature['id'] ?>" data-price="<?= (int)$feature['price'] ?>">
                                 <label class="form-check-label" for="feature-<?= (int)$feature['id'] ?>">
                                     <?= $feature['feature'] ?> — $<?= (int)$feature['price'] ?>
                                 </label>
@@ -160,7 +98,7 @@ $monthName   = date('F', mktime(0, 0, 0, $month, 1, $year));
 
                         <div>
                             <label class="col-form-label mt-4" for="user">Username:</label>
-                            <input type="text" class="form-control" placeholder="First Name" id="user" name="user" value="<?= htmlspecialchars($prefillUser) ?>" required>
+                            <input type="text" class="form-control" placeholder="First Name" id="user" name="user" required>
                         </div>
                         <div>
                             <label class="col-form-label mt-4" for="transferCode">Transfer Code:</label>
@@ -172,10 +110,7 @@ $monthName   = date('F', mktime(0, 0, 0, $month, 1, $year));
                         </div>
                     </fieldset>
                 </div>
-                <button type="submit" class="btn-secondary" id="booking-submit-btn">
-                    <span id="booking-btn-text">Complete Booking</span>
-                    <span id="booking-btn-spinner" class="spinner-border spinner-border-sm ms-2 hidden" role="status" aria-hidden="true"></span>
-                </button>
+                <input type="submit" value="Complete Booking" class="btn-secondary">
             </form>
         </div>
     </div>
@@ -226,8 +161,8 @@ $monthName   = date('F', mktime(0, 0, 0, $month, 1, $year));
 
             <div class="mb-3">
                 <label for="amount" class="form-label">Amount</label>
-                <input class="form-control" type="number" name="amount" id="amount" min="1" required disabled>
-                <small class="form-text">Auto-filled from your selected dates and activities.</small>
+                <input class="form-control" type="number" name="amount" id="amount" min="1" required>
+                <small class="form-text">Please confirm the amount you wish to withdraw.</small>
             </div>
 
             <button type="submit" class="btn btn-primary" id="tc-submit-btn">

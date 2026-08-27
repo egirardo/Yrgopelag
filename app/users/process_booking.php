@@ -8,11 +8,17 @@ try {
         redirect('index.php');
     }
 
+    // Validate input
+    if (!isset($_POST['room_id']) || !isset($_POST['start_date']) || !isset($_POST['end_date']) ||
+        !isset($_POST['transfer_code']) || !isset($_POST['user'])) {
+        throw new Exception('Missing required fields');
+    }
+
     $roomId       = (int)$_POST['room_id'];
-    $startDate    = $_POST['start_date'];
-    $endDate      = $_POST['end_date'];
-    $transferCode = $_POST['transfer_code'];
-    $guestName    = trim($_POST['user']);
+    $startDate    = validateDateFormat($_POST['start_date']);
+    $endDate      = validateDateFormat($_POST['end_date']);
+    $transferCode = validateTransferCodeFormat($_POST['transfer_code']);
+    $guestName    = validateGuestName($_POST['user']);
 
     $activities = $_POST['activities'] ?? [];
 

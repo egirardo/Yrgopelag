@@ -21,3 +21,86 @@ function redirect(string $path)
     header("Location: $path");
     exit;
 }
+
+/**
+ * Validate and sanitize guest name
+ *
+ * @param string $name
+ * @return string Sanitized name
+ * @throws Exception If validation fails
+ */
+function validateGuestName(string $name): string
+{
+    $name = trim($name);
+
+    if (empty($name)) {
+        throw new Exception('Guest name cannot be empty');
+    }
+
+    if (strlen($name) > 100) {
+        throw new Exception('Guest name is too long (max 100 characters)');
+    }
+
+    // Only allow alphanumeric, spaces, hyphens, and apostrophes
+    if (!preg_match("/^[a-zA-Z0-9\s\-']+$/", $name)) {
+        throw new Exception('Guest name contains invalid characters');
+    }
+
+    return $name;
+}
+
+/**
+ * Validate transfer code
+ *
+ * @param string $code
+ * @return string Validated code
+ * @throws Exception If validation fails
+ */
+function validateTransferCodeFormat(string $code): string
+{
+    $code = trim($code);
+
+    if (empty($code)) {
+        throw new Exception('Transfer code cannot be empty');
+    }
+
+    if (strlen($code) > 100) {
+        throw new Exception('Transfer code is too long (max 100 characters)');
+    }
+
+    // Only allow alphanumeric and common separators
+    if (!preg_match("/^[a-zA-Z0-9\-_]+$/", $code)) {
+        throw new Exception('Transfer code contains invalid characters');
+    }
+
+    return $code;
+}
+
+/**
+ * Validate date format (YYYY-MM-DD)
+ *
+ * @param string $date
+ * @return string Validated date
+ * @throws Exception If validation fails
+ */
+function validateDateFormat(string $date): string
+{
+    $date = trim($date);
+
+    if (empty($date)) {
+        throw new Exception('Date cannot be empty');
+    }
+
+    // Check format YYYY-MM-DD
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+        throw new Exception('Date must be in YYYY-MM-DD format');
+    }
+
+    // Validate it's a real date
+    $dateObj = DateTime::createFromFormat('Y-m-d', $date);
+    if (!$dateObj || $dateObj->format('Y-m-d') !== $date) {
+        throw new Exception('Invalid date');
+    }
+
+    return $date;
+}

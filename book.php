@@ -1,5 +1,4 @@
 <?php require_once __DIR__ . '/app/autoload.php'; ?>
-<?php require_once __DIR__ . '/views/header.php'; ?>
 
 <?php
 
@@ -9,6 +8,10 @@ if (!$room) {
     die('Invalid room');
 }
 
+?>
+<?php require_once __DIR__ . '/views/header.php'; ?>
+
+<?php
 if (isset($_GET['error'])) {
     echo '<div class="alert alert-danger" role="alert">';
     echo htmlspecialchars($_GET['error']);

@@ -58,6 +58,27 @@ const setLoadingState = (isLoading) => {
   }
 };
 
+// Quick-Win #3: keep the "Amount" field in sync with the booking total.
+// The field stays disabled (and greyed out) until dates have been chosen,
+// then it is auto-filled and made read-only so it always reflects the
+// real cost of the booking.
+document.addEventListener('bookingTotalUpdated', (event) => {
+  const amountInput = document.getElementById('amount');
+  if (!amountInput) return;
+
+  const total = event.detail && event.detail.total;
+
+  if (total > 0) {
+    amountInput.value = total;
+    amountInput.disabled = false;
+    amountInput.readOnly = true;
+  } else {
+    amountInput.value = '';
+    amountInput.readOnly = false;
+    amountInput.disabled = true;
+  }
+});
+
 const transferCodeForm = document.getElementById('tc-offcanvas');
 transferCodeForm.addEventListener('submit', (event) => {
   event.preventDefault();

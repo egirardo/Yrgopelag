@@ -106,6 +106,20 @@ function validateDateFormat(string $date): string
 }
 
 /**
+ * Validate that a date range represents at least one night's stay.
+ *
+ * @param string $startDate Validated YYYY-MM-DD start date
+ * @param string $endDate   Validated YYYY-MM-DD end date
+ * @throws Exception If the end date is not strictly after the start date
+ */
+function validateDateRange(string $startDate, string $endDate): void
+{
+    if ($endDate <= $startDate) {
+        throw new Exception('End date must be after the start date');
+    }
+}
+
+/**
  * Generate a CSRF token and store in session
  *
  * @return string The CSRF token

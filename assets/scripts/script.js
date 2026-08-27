@@ -18,21 +18,78 @@ const cards = document.querySelectorAll('.review-card');
     setInterval(scrollToNextReview, 4000);
   }
 
-// Date validation
+// Date validation (Quick-Win #2)
 const startDateInput = document.getElementById("start_date");
 const endDateInput = document.getElementById("end_date");
+const bookingForm = document.getElementById("selection");
+const formErrorContainer = document.getElementById("form-error-container");
+const formErrorMessage = document.getElementById("form-error-message");
 
 if (startDateInput && endDateInput) {
-    startDateInput.addEventListener("change", function() {
-        endDateInput.min = this.value;
 
-        if (endDateInput.value && endDateInput.value < this.value) {
+    function showFormError(message) {
+        if (!formErrorContainer || !formErrorMessage) return;
+        formErrorMessage.textContent = message;
+        formErrorContainer.classList.remove("hidden");
+        formErrorContainer.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function clearFormError() {
+        if (!formErrorContainer) return;
+        formErrorContainer.classList.add("hidden");
+    }
+
+    // The end date must be strictly after the start date (no 0/negative night stays).
+    function updateEndMin() {
+        if (!startDateInput.value) return;
+        const nextDay = new Date(startDateInput.value + "T00:00:00");
+        nextDay.setDate(nextDay.getDate() + 1);
+        endDateInput.min = nextDay.toISOString().slice(0, 10);
+    }
+
+    startDateInput.addEventListener("change", function() {
+        updateEndMin();
+
+        if (endDateInput.value && endDateInput.value <= this.value) {
             endDateInput.value = "";
         }
+
+        clearFormError();
     });
 
-        if (startDateInput.value) {
-            endDateInput.min = startDateInput.value;
-        }
-        }
+    endDateInput.addEventListener("change", clearFormError);
+
+    if (startDateInput.value) {
+        updateEndMin();
+    }
+
+    if (bookingForm) {
+        bookingForm.addEventListener("submit", function(event) {
+            const requiredFields = bookingForm.querySelectorAll("[required]");
+            let hasMissingField = false;
+
+            requiredFields.forEach((field) => {
+                if (!field.value || !field.value.trim()) {
+                    hasMissingField = true;
+                }
+            });
+
+            if (hasMissingField) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                showFormError("Please fill in all required fields before submitting.");
+                return;
+            }
+
+            if (endDateInput.value <= startDateInput.value) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                showFormError("End date must be after the start date.");
+                return;
+            }
+
+            clearFormError();
+        });
+    }
+}
 });

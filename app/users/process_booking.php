@@ -25,6 +25,10 @@ try {
     $transferCode = validateTransferCodeFormat($_POST['transfer_code']);
     $guestName    = validateGuestName($_POST['user']);
 
+    // Quick-Win #2: reject non-positive-night stays server-side too,
+    // since client-side checks can always be bypassed.
+    validateDateRange($startDate, $endDate);
+
     $activities = $_POST['activities'] ?? [];
 
     $totalCost = calculateBookingCost($db, $roomId, $startDate, $endDate, $activities);
@@ -70,6 +74,18 @@ try {
         $db->rollBack();
     }
 
-    header('Location: ../../book.php?room_id=' . $roomId . '&error=' . urlencode($e->getMessage()));
+    // Quick-Win #4: preserve dates, selected activities, and the guest name
+    // so the user doesn't have to re-enter everything after a failed booking.
+    // Deliberately excludes transfer_code/total_cost (sensitive/derived values).
+    $_SESSION['booking_form_data'] = [
+        'start_date' => is_string($_POST['start_date'] ?? null) ? $_POST['start_date'] : '',
+        'end_date'   => is_string($_POST['end_date'] ?? null) ? $_POST['end_date'] : '',
+        'activities' => array_map('intval', $_POST['activities'] ?? []),
+        'user'       => is_string($_POST['user'] ?? null) ? $_POST['user'] : '',
+    ];
+
+    $redirectRoomId = $_POST['room_id'] ?? ($roomId ?? '');
+
+    header('Location: ../../book.php?room_id=' . urlencode((string)$redirectRoomId) . '&error=' . urlencode($e->getMessage()));
     exit;
 }
